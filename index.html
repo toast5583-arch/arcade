@@ -44,19 +44,19 @@
             letter-spacing: 1px;
         }
 
-        /* Game Selection Grid - Automatically handles 3 games */
+        /* Game Selection Grid - Made wider and cards significantly larger */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            max-width: 960px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Increased minimum card size */
+            gap: 40px; /* More spacing for larger layout */
+            max-width: 1200px; /* Expanded grid layout area */
             width: 100%;
         }
 
         /* Smooth-Edged Cards */
         .game-card {
             background-color: #1b202c;
-            border-radius: 16px;
+            border-radius: 20px; /* Slightly more rounded for bigger cards */
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -66,15 +66,15 @@
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+            transform: translateY(-8px); /* Higher lift on hover */
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.25);
             border-color: #00f2fe;
         }
 
-        /* Image Placeholder Slots */
+        /* Image Placeholder Slots - Made taller for the bigger cards */
         .game-image-slot {
             width: 100%;
-            height: 200px;
+            height: 260px; /* Increased height from 200px */
             background-color: #252d3d;
             background-size: cover;
             background-position: center;
@@ -82,24 +82,24 @@
 
         /* Game Titles */
         .game-info {
-            padding: 15px;
+            padding: 20px; /* Extra padding */
             text-align: center;
         }
 
         .game-title {
             margin: 0;
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.6rem; /* Bigger text */
+            font-weight: 700;
         }
 
-        /* Game Player Screen (Hidden by default) */
+        /* Game Player Screen - Made massive for better gameplay */
         #game-container {
             display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 960px;
-            height: 70vh;
+            max-width: 1200px; /* Increased from 960px */
+            height: 85vh; /* Increased from 70vh to take up most of the screen */
         }
 
         /* Making your iframes fit perfectly */
@@ -107,8 +107,8 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
         }
 
         /* Back to Menu Button */
@@ -116,7 +116,7 @@
             background: #252d3d;
             color: #fff;
             border: 1px solid #2c354a;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
@@ -176,38 +176,4 @@
     </div>
 
     <script>
-        // Your working iframe links are fully included right here:
-        const subwayIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html" title="Subway Surfers City" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
-        const slopeIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://slopeio.org/game/slope-gm/" title="Slope" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
-        
-        // PASTE YOUR RIVALS IFRAME CODE BETWEEN THE BACKTICKS BELOW:
-        const rivalsIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://veck.io/" title="Veck IO" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
-
-        function loadGame(gameType) {
-            document.getElementById('main-header').style.display = 'none';
-            document.getElementById('menu-grid').style.display = 'none';
-            
-            const container = document.getElementById('game-container');
-            const slot = document.getElementById('iframe-slot');
-            container.style.display = 'flex';
-            
-            if (gameType === 'subway') {
-                slot.innerHTML = subwayIframeCode;
-            } else if (gameType === 'slope') {
-                slot.innerHTML = slopeIframeCode;
-            } else if (gameType === 'rivals') {
-                slot.innerHTML = rivalsIframeCode;
-            }
-        }
-
-        function showMenu() {
-            document.getElementById('game-container').style.display = 'none';
-            document.getElementById('iframe-slot').innerHTML = '';
-            
-            document.getElementById('main-header').style.display = 'block';
-            document.getElementById('menu-grid').style.display = 'grid';
-        }
-    </script>
-
-</body>
-</html>
+        const subwayIframeCode = `<iframe id="iframehtml5" width="100
