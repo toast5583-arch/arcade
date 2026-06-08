@@ -5,34 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arcade</title>
     <style>
+        /* Base Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: white;
+            background-color: #11141a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Header Setup */
+        .header-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #8a99ad;
+            margin: 5px 0 0 0;
+            letter-spacing: 1px;
+        }
+
+        /* Game Selection Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Smooth-Edged Cards */
+        .game-card {
+            background-color: #1b202c;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #2c354a;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+            border-color: #00f2fe;
+        }
+
+        /* Image Placeholder Slots */
+        .game-image-slot {
+            width: 100%;
+            height: 200px;
+            background-color: #252d3d;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Game Titles */
+        .game-info {
+            padding: 15px;
             text-align: center;
         }
-        .game-container {
-            margin: 20px auto;
-            max-width: 800px;
+
+        .game-title {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
-        /* This makes your game bigger */
-        #iframehtml5 {
-            width: 800px;  /* Change this to make it wider */
-            height: 600px; /* Change this to make it taller */
-            max-width: 100%; /* Keeps it from breaking on smaller screens */
+
+        /* Game Player Screen (Hidden by default) */
+        #game-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 960px;
+            height: 70vh;
+        }
+
+        /* Making your iframes fit perfectly */
+        #game-container iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 8px; /* Smooths out the corners slightly */
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Back to Menu Button */
+        .back-btn {
+            background: #252d3d;
+            color: #fff;
+            border: 1px solid #2c354a;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+            align-self: flex-start;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #ff4757;
+            border-color: #ff4757;
+        }
+
+        /* Responsive tweak for mobile screens */
+        @media (max-width: 600px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Arcade</h1>
-    <p>unblocked games</p>
-
-    <div class="game-container">
-        <iframe id="iframehtml5" scrolling="auto" allowfullscreen="true" src="https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html" title="Subway Surfers City" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>
+    <div id="main-header" class="header-container">
+        <h1 class="main-title">Arcade</h1>
+        <h2 class="subtitle">unblocked games</h2>
     </div>
+
+    <div id="menu-grid" class="game-grid">
+        
+        <div class="game-card" onclick="loadGame('subway')">
+            <div class="game-image-slot" style="background-image: url('subway-surfers.jpg');"></div>
+            <div class="game-info">
+                <h3 class="game-title">Subway Surfers</h3>
+            </div>
+        </div>
+
+        <div class="game-card" onclick="loadGame('slope')">
+            <div class="game-image-slot" style="background-image: url('slope.jpg');"></div>
+            <div class="game-info">
+                <h3 class="game-title">Slope</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="game-container">
+        <button class="back-btn" onclick="showMenu()">← Back to Menu</button>
+        <div id="iframe-slot" style="width:100%; height:100%;"></div>
+    </div>
+
+    <script>
+        // PASTE YOUR GAME IFRAME CODE BETWEEN THE QUOTES BELOW:
+        const subwayIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html" title="Subway Surfers City" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
+        const slopeIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://slopeio.org/game/slope-gm/" title="Slope" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
+
+        function loadGame(gameType) {
+            // Hide the menu and header
+            document.getElementById('main-header').style.display = 'none';
+            document.getElementById('menu-grid').style.display = 'none';
+            
+            // Show the game container
+            const container = document.getElementById('game-container');
+            const slot = document.getElementById('iframe-slot');
+            container.style.display = 'flex';
+            
+            // Inject the proper iframe code
+            if (gameType === 'subway') {
+                slot.innerHTML = subwayIframeCode;
+            } else if (gameType === 'slope') {
+                slot.innerHTML = slopeIframeCode;
+            }
+        }
+
+        function showMenu() {
+            // Hide the game container and clear the iframe so the music stops playing
+            document.getElementById('game-container').style.display = 'none';
+            document.getElementById('iframe-slot').innerHTML = '';
+            
+            // Bring back the main menu and header
+            document.getElementById('main-header').style.display = 'block';
+            document.getElementById('menu-grid').style.display = 'grid';
+        }
+    </script>
 
 </body>
 </html>
