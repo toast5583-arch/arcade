@@ -44,12 +44,12 @@
             letter-spacing: 1px;
         }
 
-        /* Game Selection Grid */
+        /* Game Selection Grid - Automatically handles 3 games */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 30px;
-            max-width: 800px;
+            max-width: 960px;
             width: 100%;
         }
 
@@ -161,6 +161,13 @@
             </div>
         </div>
 
+        <div class="game-card" onclick="loadGame('rivals')">
+            <div class="game-image-slot" style="background-image: url('rivals.jpg');"></div>
+            <div class="game-info">
+                <h3 class="game-title">Rivals</h3>
+            </div>
+        </div>
+
     </div>
 
     <div id="game-container">
@@ -169,34 +176,34 @@
     </div>
 
     <script>
-        // PASTE YOUR GAME IFRAME CODE BETWEEN THE QUOTES BELOW:
+        // Your working iframe links are fully included right here:
         const subwayIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html" title="Subway Surfers City" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
         const slopeIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://slopeio.org/game/slope-gm/" title="Slope" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
+        
+        // PASTE YOUR RIVALS IFRAME CODE BETWEEN THE BACKTICKS BELOW:
+        const rivalsIframeCode = `<iframe id="iframehtml5" width="100%" height="100%" frameborder="0" border="0" scrolling="auto" class="iframe-default" allowfullscreen="true" src="https://veck.io/" title="Veck IO" sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads"></iframe>`;
 
         function loadGame(gameType) {
-            // Hide the menu and header
             document.getElementById('main-header').style.display = 'none';
             document.getElementById('menu-grid').style.display = 'none';
             
-            // Show the game container
             const container = document.getElementById('game-container');
             const slot = document.getElementById('iframe-slot');
             container.style.display = 'flex';
             
-            // Inject the proper iframe code
             if (gameType === 'subway') {
                 slot.innerHTML = subwayIframeCode;
             } else if (gameType === 'slope') {
                 slot.innerHTML = slopeIframeCode;
+            } else if (gameType === 'rivals') {
+                slot.innerHTML = rivalsIframeCode;
             }
         }
 
         function showMenu() {
-            // Hide the game container and clear the iframe so the music stops playing
             document.getElementById('game-container').style.display = 'none';
             document.getElementById('iframe-slot').innerHTML = '';
             
-            // Bring back the main menu and header
             document.getElementById('main-header').style.display = 'block';
             document.getElementById('menu-grid').style.display = 'grid';
         }
